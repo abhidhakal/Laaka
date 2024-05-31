@@ -1,0 +1,22 @@
+.main-area {
+    height: 3000px;
+    position: relative;
+    top: 90px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.scrollable-pic {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.images {
+    width: 7000px;
+    max-height: 600px;
+}
+
+
