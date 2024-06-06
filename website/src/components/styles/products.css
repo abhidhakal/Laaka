@@ -37,8 +37,9 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 
-    padding-left: 10px;
     margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .products::-webkit-scrollbar {
@@ -71,8 +72,6 @@
 }
 
 .product:hover {
-    height: 300px;
-    width: 315px;
     cursor: pointer;
     transition: 0.3s;
 }
