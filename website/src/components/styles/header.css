@@ -98,7 +98,7 @@
     width: 100%;
     height: 100%;
     padding-top: 20px;
-    background-color: #83111e;
+    background-color: #99202a;
     color: white;
     transition: transform 0.5s cubic-bezier(0.53, 0.21, 0, 1);
 }
@@ -116,4 +116,117 @@
     width: 25px;
     margin: 10px;
     cursor: pointer;
+}
+
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    font-family: 'Montserrat', monospace;
+}
+
+.auth-content {
+    background-color: whitesmoke;
+    margin: auto;
+    padding: 20px;
+    border: none;
+    width: 80%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.44);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    transition: height 0.3s ease;
+}
+
+.auth-content.login {
+    height: 400px;
+    width: 400px;
+}
+
+.auth-content.signup {
+    height: 500px;
+    width: 400px;
+}
+
+.close-btn {
+    color: gray;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-content label {
+    font-weight: bold;
+}
+
+.auth-content input[type="email"],
+.auth-content input[type="password"],
+.auth-content input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    display: inline-block;
+    border: 1px solid darkgray;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.auth-content button[type="submit"] {
+    background-color: #99202a;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 60%;
+    border-radius: 24px;
+    align-content: center;
+    align-self: center;
+
+    font-family: 'Montserrat', monospace;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.go-signup {
+    color: #99202a;
+    cursor: pointer;
+    font-weight: bolder;
+    font-family: 'Montserrat', monospace;
+}
+
+.go-signup:hover {
+    color: #8ba2bd;
+}
+
+.names {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Space between first and last name fields */
+}
+
+.names > div {
+    flex: 1; /* Make first and last name fields take equal space */
 }
