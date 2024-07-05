@@ -1,4 +1,4 @@
-import '../components/styles/categories.css';
+import '../styles/categories.css';
 
 function Category() {
     return (
@@ -19,7 +19,7 @@ function Category() {
 
             <div className="grid-second">
                 <div className="category-brands">
-                    <img src="../public/assets/images/trendingshoes.jpeg" alt="shoes"/>
+                    <img src="../public/assets/images/af1-categ.png" alt="shoes"/>
                     <div className="footwear">Footwear</div>
                 </div>
 

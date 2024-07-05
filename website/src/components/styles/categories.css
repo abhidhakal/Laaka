@@ -1,5 +1,5 @@
 .categories {
-    height: 25%;
+    height: 750px;
     width: 100%;
 
     background-color: white;
@@ -59,6 +59,7 @@
     align-content: center;
     bottom: 5px;
     margin-left: 8px;
+    color: black;
 }
 
 .clothing {

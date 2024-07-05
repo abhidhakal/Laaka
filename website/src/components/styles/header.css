@@ -13,8 +13,6 @@
     top: 0;
     right: 0;
     left: 0;
-
-    box-shadow: 0px 1px 5px darkgray;
 }
 
 .left-section {
@@ -44,9 +42,8 @@
 
 .cats:hover {
     text-decoration: underline;
-    font-weight: 500;
-    font-size: 20px;
-    transition: 0.5s;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .right-section {
@@ -131,6 +128,10 @@
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
     font-family: 'Montserrat', monospace;
+}
+
+.auth h2 {
+    color: #8ba2bd;
 }
 
 .auth-content {

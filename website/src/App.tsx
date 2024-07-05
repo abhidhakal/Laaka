@@ -1,8 +1,10 @@
-import './App.css'
-import HomePage from "./HomePage.tsx";
+import HomePage from "./screens/HomePage.tsx";
 
 function App() {
-    return<div><HomePage></HomePage></div>
+        // @ts-ignore
+    return (
+        <HomePage />
+        );
 }
 
 export default App

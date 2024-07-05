@@ -1,0 +1,22 @@
+.about-frame {
+    height: 1000px;
+    position: relative;
+    top: 90px;
+    font-family: 'Montserrat', monospace;
+    background-color: whitesmoke;
+
+    overflow-x: hidden;
+}
+
+.about-section {
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    color: #99202a;
+}
+
+.mail {
+    font-weight: bold;
+}

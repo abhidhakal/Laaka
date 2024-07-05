@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/footer.css';
+import '../styles/footer.css';
 
 const Footer: React.FC = () => {
     return (
@@ -23,8 +23,8 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="footer-section contact">
                     <h2 className="logo-text">Contact Us</h2>
-                    <p className="texts">Email: support@shoestore.com</p>
-                    <p className="texts">Phone: +123 456 789</p>
+                    <p className="texts">Email: laakanepal@gmail.com</p>
+                    <p className="texts">Phone: +977 9865206747</p>
                 </div>
             </div>
             <div className="footer-bottom">

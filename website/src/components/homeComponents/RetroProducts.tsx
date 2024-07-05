@@ -1,4 +1,4 @@
-import '../components/styles/products.css';
+import '../styles/products.css';
 
 function RetroProducts() {
     return (

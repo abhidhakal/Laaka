@@ -1,0 +1,36 @@
+.brandsframe {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+    justify-content: space-evenly;
+}
+
+.brand {
+    background-color: whitesmoke;
+    width: 250px;
+
+    align-self: center;
+    align-content: center;
+    text-align: center;
+
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.brand-logo {
+    height: 100px;
+    width: 50%;
+    align-self: center;
+    transition: 0.3s;
+}
+
+.brand-logo:hover {
+    height: 150px;
+}
