@@ -1,11 +1,12 @@
 .about-frame {
-    height: 1000px;
+    height: 3000px;
     position: relative;
     top: 90px;
     font-family: 'Montserrat', monospace;
     background-color: whitesmoke;
 
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .about-section {
@@ -19,4 +20,26 @@
 
 .mail {
     font-weight: bold;
+}
+
+.scroll-to-top-btn {
+    height: 60px;
+    width: 60px;
+    z-index: 1000;
+
+    border: none;
+    border-radius: 30px;
+
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+
+    background-color: #99202a;
+    box-shadow: 1px 1px 5px black;
+
+}
+
+.scroll-to-top-btn img {
+    height: 100%;
+    width: 100%;
 }

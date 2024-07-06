@@ -33,7 +33,7 @@ function Header({ onSectionChange }: HeaderProps) {
     return (
         <header className="header">
             <div className="left-section">
-                <img src="../public/assets/logos/logo_slogan_large.svg" alt="Logo" />
+                <img src="../public/assets/logos/logo_slogan_large.svg" alt="Laaka" onClick={() => navigateToPage('logotomain')}/>
             </div>
             <div className="mid-section">
                 <p className="cats" onClick={() => navigateToPage('trending')}>TRENDING</p>

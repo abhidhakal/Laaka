@@ -1,4 +1,5 @@
 import '../styles/brands.css';
+import '../styles/main.css';
 
 function Category() {
     return (
@@ -19,6 +20,7 @@ function Category() {
             <div className="brand">
                 <img className="brand-logo" src="../public/assets/images/reebok-logo.svg" alt=""/>
             </div>
+
         </div>
     )
 }

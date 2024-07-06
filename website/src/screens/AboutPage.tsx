@@ -1,7 +1,6 @@
 import Header from '../components/staticComponents/Header.tsx';
 import '../components/styles/general.css';
 import '../components/styles/footer.css';
-import Head from "../components/staticComponents/Head.tsx";
 import {useState} from "react";
 import Main from "../components/homeComponents/Main.tsx";
 import BrandPage from "./BrandPage.tsx";
@@ -39,15 +38,10 @@ function AboutPage() {
 
     return (
         <>
-            <html lang="en">
-            <Head/>
-            <body>
             <Header onSectionChange={navigatePage}/>
             <main className="main">
                 {content}
             </main>
-            </body>
-            </html>
         </>
     )
 }

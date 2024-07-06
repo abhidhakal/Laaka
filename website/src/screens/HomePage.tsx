@@ -3,7 +3,7 @@ import Main from '../components/homeComponents/Main.tsx';
 import '../components/styles/general.css';
 import '../components/styles/footer.css';
 import Head from "../components/staticComponents/Head.tsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BrandPage from "./BrandPage.tsx";
 import FootwearPage from "./FootwearPage.tsx";
 import ClothingPage from "./ClothingPage.tsx";
@@ -16,10 +16,18 @@ function HomePage() {
         setCurrentSection(section);
     };
 
+    useEffect(() => {
+        // Scroll to the top of the page whenever currentSection changes
+        window.scrollTo(0, 0);
+    }, [currentSection]);
+
     let content;
     switch (currentSection) {
         case 'trending':
-            content = <Main/>;
+            content = <Main />;
+            break;
+        case 'logotomain':
+            content = <Main />;
             break;
         case 'brands':
             content = <BrandPage />;
@@ -34,7 +42,7 @@ function HomePage() {
             content = <AboutPage />;
             break;
         default:
-            content = <Main/>;
+            content = <Main />;
     }
 
     return (
@@ -49,7 +57,7 @@ function HomePage() {
             </body>
             </html>
         </>
-    )
+    );
 }
 
 export default HomePage;
