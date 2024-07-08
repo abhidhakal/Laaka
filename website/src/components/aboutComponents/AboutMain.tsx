@@ -7,7 +7,7 @@ function AboutMain() {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth" // Smooth scrolling animation
+            behavior: "smooth"
         });
     };
 
@@ -90,7 +90,7 @@ function AboutMain() {
                 <h2>Contact Us</h2>
                 <p>
                     Have questions or need assistance? Our customer support team is here to help. Reach out to us
-                    at <span className='mail'>laakanepal@gmail.com</span>, and we will be happy to assist you.
+                    at <strong>laakanepal@gmail.com</strong>, and we will be happy to assist you.
                 </p>
             </section>
 
