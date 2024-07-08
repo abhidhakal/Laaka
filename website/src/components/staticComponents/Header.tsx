@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/header.css';
 
 interface HeaderProps {
@@ -8,6 +8,15 @@ interface HeaderProps {
 function Header({ onSectionChange }: HeaderProps) {
     const [showForm, setShowForm] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+        const savedMode = localStorage.getItem('dark-mode');
+        return savedMode === 'true' || false;
+    });
+
+    useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        localStorage.setItem('dark-mode', isDarkMode.toString());
+    }, [isDarkMode]);
 
     const handleGetStartedClick = () => {
         setShowForm(true);
@@ -30,22 +39,39 @@ function Header({ onSectionChange }: HeaderProps) {
         onSectionChange(section);
     };
 
+    const handleThemeSwitch = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
     return (
         <header className="header">
             <div className="left-section">
-                <img src="../public/assets/logos/logo_slogan_large.svg" alt="Laaka" onClick={() => navigateToPage('logotomain')}/>
+                <img src="../public/assets/logos/logo_slogan_large.svg" alt="Laaka" onClick={() => navigateToPage('home')} />
             </div>
             <div className="mid-section">
-                <p className="cats" onClick={() => navigateToPage('trending')}>TRENDING</p>
+                <p className="cats" onClick={() => navigateToPage('home')}>HOME</p>
                 <p className="cats" onClick={() => navigateToPage('brands')}>BRANDS</p>
                 <p className="cats" onClick={() => navigateToPage('footwear')}>FOOTWEAR</p>
                 <p className="cats" onClick={() => navigateToPage('clothing')}>CLOTHING</p>
                 <p className="cats" onClick={() => navigateToPage('about')}>ABOUT US</p>
             </div>
             <div className="right-section">
+                <label className="theme-switch">
+                    <input type="checkbox" className="checkbox" checked={isDarkMode} onChange={handleThemeSwitch} />
+                    <div className="container">
+                        <div className="circle-container">
+                            <div className="sun-moon-container">
+                                <div className="moon">
+                                    <div className="spot"></div>
+                                    <div className="spot"></div>
+                                    <div className="spot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
                 <button className="signin-btn" onClick={handleGetStartedClick}>Get Started</button>
             </div>
-
             {showForm && (
                 <div className="auth">
                     <div className={`auth-content ${isLogin ? 'login' : 'signup'}`}>

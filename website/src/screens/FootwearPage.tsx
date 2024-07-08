@@ -18,7 +18,7 @@ function FootwearPage() {
 
     let content;
     switch (currentSection) {
-        case 'trending':
+        case 'home':
             content = <Main/>;
             break;
         case 'brands':

@@ -1,11 +1,9 @@
 p {
     font-family: 'Montserrat', monospace;
-    color: black;
 }
 
 body {
     overflow-x: hidden;
-    background-color: white;
     scroll-behavior: smooth;
     min-height: 100vh;
     margin: 0;

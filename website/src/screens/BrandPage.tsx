@@ -18,7 +18,7 @@ function BrandPage() {
 
     let content;
     switch (currentSection) {
-        case 'trending':
+        case 'home':
             content = <Main/>;
             break;
         case 'brands':

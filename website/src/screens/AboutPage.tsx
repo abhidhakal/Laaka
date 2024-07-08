@@ -17,20 +17,20 @@ function AboutPage() {
 
     let content;
     switch (currentSection) {
-        case 'trending':
+        case 'home':
             content = <Main/>;
             break;
         case 'brands':
-            content = <BrandPage />;
+            content = <BrandPage/>;
             break;
         case 'footwear':
-            content = <FootwearPage />;
+            content = <FootwearPage/>;
             break;
         case 'clothing':
-            content = <ClothingPage />;
+            content = <ClothingPage/>;
             break;
         case 'about':
-            content = <AboutPage />;
+            content = <AboutPage/>;
             break;
         default:
             content = <AboutMain/>;

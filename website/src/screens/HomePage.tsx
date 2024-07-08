@@ -23,10 +23,7 @@ function HomePage() {
 
     let content;
     switch (currentSection) {
-        case 'trending':
-            content = <Main />;
-            break;
-        case 'logotomain':
+        case 'home':
             content = <Main />;
             break;
         case 'brands':
