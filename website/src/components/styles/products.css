@@ -108,13 +108,15 @@
 }
 
 .product-retro {
-
     height: 250px;
-    width: 300px;
+    width: 250px;
     box-shadow: 1px 1px 5px black;
 
     margin: 0;
     padding: 0;
+
+    margin-left: 24px;
+    margin-right: 24px;
 
     display: flex;
     flex-direction: column;
@@ -129,6 +131,7 @@
     height: 300px;
     width: 250px;
     border-radius: 15px;
+    background-color: whitesmoke;
 }
 
 .productname {

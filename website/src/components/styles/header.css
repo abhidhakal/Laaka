@@ -363,7 +363,7 @@ body.dark-mode .cats:hover {
 }
 
 body.dark-mode .signin-btn {
-    background-color: white;
+    background-color: whitesmoke;
     color: black;
     border: 1px solid #444;
 }
