@@ -1,13 +1,20 @@
-import Header from '../components/customer/staticComponents/Header.tsx';
-import Main from '../components/customer/homeComponents/Main.tsx';
-import '../components/styles/customer/general.css';
-import '../components/styles/customer/footer.css';
-import Head from "../components/customer/staticComponents/Head.tsx";
+import '../../components/styles/customer/general.css';
+import '../../components/styles/customer/footer.css';
 import { useState, useEffect } from "react";
-import BrandPage from "./customerScreens/BrandPage.tsx";
-import FootwearPage from "./customerScreens/FootwearPage.tsx";
-import ClothingPage from "./customerScreens/ClothingPage.tsx";
-import AboutPage from "./customerScreens/AboutPage.tsx";
+// @ts-ignore
+import Main from "../../components/customer/homeComponents/Main.tsx";
+// @ts-ignore
+import BrandPage from "./BrandPage.tsx";
+// @ts-ignore
+import FootwearPage from "./FootwearPage.tsx";
+// @ts-ignore
+import ClothingPage from "./ClothingPage.tsx";
+// @ts-ignore
+import AboutPage from "./AboutPage.tsx";
+// @ts-ignore
+import Header from "../../components/customer/staticComponents/Header.tsx";
+import CustomerHeader from "../../components/customer/staticComponents/CustomerHeader.tsx";
+
 
 function HomePage() {
     const [currentSection, setCurrentSection] = useState('');
@@ -44,15 +51,12 @@ function HomePage() {
 
     return (
         <>
-            <html lang="en">
-            <Head />
             <body>
-            <Header onSectionChange={navigatePage} />
+            <CustomerHeader onSectionChange={navigatePage} />
             <main className="main">
                 {content}
             </main>
             </body>
-            </html>
         </>
     );
 }

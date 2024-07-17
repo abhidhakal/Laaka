@@ -1,0 +1,148 @@
+.products-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.products {
+    height: 350px;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-left: 8px;
+}
+
+.products::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-btn {
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-btn img {
+    width: 35px;
+    height: 35px;
+}
+
+.scroll-btn.left {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.scroll-btn.right {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.product {
+    height: 250px;
+    width: 250px;
+    box-shadow: 1px 1px 5px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.product img {
+    height: 250px;
+    width: 250px;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.product p {
+    font-family: "Montserrat", monospace;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.product:hover {
+    cursor: pointer;
+    height: 300px;
+    transition: 0.3s;
+    opacity: 60%;
+}
+
+.products-retro {
+    height: 500px;
+    width: 100%;
+
+
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin: 0;
+
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.product-retro {
+    height: 250px;
+    width: 250px;
+    box-shadow: 1px 1px 5px black;
+
+    margin: 0;
+    padding: 0;
+
+    margin-left: 24px;
+    margin-right: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    border-radius: 15px;
+
+}
+
+.product-retro img {
+    height: 300px;
+    width: 250px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+}
+
+.productname {
+    font-family: 'Ubuntu Sans Mono', monospace;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-retro:hover {
+    height: 300px;
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 60%;
+}

@@ -1,0 +1,20 @@
+p {
+    font-family: 'Montserrat', monospace;
+}
+
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btnn {
+    width: 100px;
+}

@@ -1,0 +1,129 @@
+.brand-frame {
+    height: 100%;
+    position: relative;
+    top: 90px;
+    font-family: 'Montserrat', monospace;
+
+    scroll-behavior: smooth;
+}
+
+.page-title {
+    margin: 16px;
+    margin-bottom: 48px;
+    color: #99202a;
+}
+
+.addbrand {
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+
+    width: 700px;
+    margin: 16px;
+
+}
+
+.addbrand input {
+    height: 40px;
+    width: 250px;
+    padding-left: 16px;
+
+    border: 1px solid black;
+    border-radius: 15px;
+
+    font-size: 16px;
+
+}
+
+.addbrand-btn {
+    height: 40px;
+    align-self: center;
+    background-color: #99202a;
+    color: white;
+
+    border: 1px solid white;
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+
+.addshoe {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+}
+
+.addshoe-btn {
+    height: 40px;
+    align-self: center;
+    background-color: #99202a;
+    color: white;
+
+    border: 1px solid white;
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+
+.shoecontent {
+    display: flex;
+    width: 400px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.shoecontent-label {
+    font-size:18px;
+    margin: 16px;
+}
+
+.shoecontent-input {
+    height: 35px;
+    width: 200px;
+    margin: 8px;
+}
+
+.brands-list {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.brands-list-title {
+    padding: 8px;
+}
+
+.brand-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.brand-item:last-child {
+    border-bottom: none;
+}
+
+
+.scroll-to-top-btn {
+    height: 60px;
+    width: 60px;
+    z-index: 1000;
+
+    border: none;
+    border-radius: 30px;
+
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+
+    background-color: #99202a;
+    box-shadow: 1px 1px 5px black;
+
+}
+
+.scroll-to-top-btn img {
+    height: 100%;
+    width: 100%;
+}

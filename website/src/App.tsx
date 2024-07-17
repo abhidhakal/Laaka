@@ -1,8 +1,10 @@
-import HomePage from "./screens/HomePage.tsx";
+import AdminHomePage from "./screens/sellerScreens/AdminHomePage.tsx";
+// import CustomerHomePage from "./screens/customerScreens/CustomerHomePage.tsx";
 
 function App() {
     return (
-        <HomePage />
+        <AdminHomePage />
+        // <CustomerHomePage/>
         );
 }
 

@@ -1,0 +1,139 @@
+.main-area {
+  position: absolute;
+  top: 90px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: 0;
+}
+
+.scrollable-pic {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.edit-button {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background-color: #8ba2bd;
+  color: white;
+  cursor: pointer;
+  align-items: center;
+  align-content: center;
+
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.edit-button img {
+  height: 30px;
+  width: 30px;
+}
+
+.images {
+  width: 100%;
+  max-height: 600px;
+}
+
+.para {
+  margin-top: 30px;
+  margin-bottom: 0;
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.para-2 {
+  margin-top: 70px;
+  margin-bottom: 0;
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.para-3 {
+  margin-top: 50px;
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.para-4 {
+  margin-top: 50px;
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.shoestab {
+  height: 400px;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  justify-content: center;
+}
+
+.shoe {
+  position: relative;
+  height: 100%;
+  width: 18%;
+  cursor: pointer;
+}
+
+.shoestab-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.shoe-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.shoe-info p {
+  margin: 0;
+  font-size: 16px;
+  color: white;
+}
+
+.scroll-to-top-btn {
+  height:60px;
+  width: 60px;
+  z-index: 1000;
+
+  border: none;
+  border-radius: 30px;
+
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+  background-color: #99202a;
+  box-shadow: 1px 1px 5px black;
+
+}
+
+.scroll-to-top-btn img {
+  height: 100%;
+  width: 100%;
+}
+
+
