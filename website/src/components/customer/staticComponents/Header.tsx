@@ -43,34 +43,72 @@ function Header({ onSectionChange }: HeaderProps) {
         setIsDarkMode(!isDarkMode);
     };
 
-    const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSignupSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        const identifier = formData.get('identifier') as string;
-        const password = formData.get('password') as string;
+        const signupData = {
+            username: formData.get('signup-username') as string,
+            email: formData.get('signup-email') as string,
+            password: formData.get('signup-password') as string,
+            fullname: formData.get('fullname') as string,
+            contact: formData.get('contact') as string,
+            address: formData.get('address') as string,
+        };
 
-        // Your authentication logic here
-        const response = await fetch('http://localhost:8070/api/auth/login', {
+        const response = await fetch('http://localhost:8070/api/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ identifier, password }),
+            body: JSON.stringify(signupData),
         });
 
         if (response.ok) {
-            const data = await response.json();
-            if (data.role === 'admin') {
-                navigateToPage('admin');
-            } else {
-                navigateToPage('customer');
-            }
+            alert('Signup successful, you can now login.');
+            switchToLogin();
         } else {
-            alert('Invalid credentials');
+            const error = await response.text();
+            alert(`Signup failed: ${error}`);
+        }
+    };
+
+    const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const username = formData.get('identifier') as string;
+        const password = formData.get('password') as string;
+
+        try {
+            const response = await fetch('http://localhost:8070/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                // Check for specific username and password
+                if (username === 'admin' && password === 'password') {
+                    navigateToPage('admin');
+                } else {
+                    navigateToPage('customer');
+                }
+            } else {
+                const error = await response.text();
+                alert(`Login failed: ${error}`);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred. Please try again.');
         }
 
         closeForm();
     };
+
+
+
+
 
     return (
         <header className="header">
@@ -120,7 +158,7 @@ function Header({ onSectionChange }: HeaderProps) {
                         ) : (
                             <>
                                 <h2>Signup</h2>
-                                <form>
+                                <form onSubmit={handleSignupSubmit}>
                                     <label htmlFor="fullname">Full Name:</label>
                                     <input type="text" id="fullname" name="fullname" required/>
 
