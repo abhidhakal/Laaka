@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import '../styles/admin/adminmain.css';
-import Products from "../customer/homeComponents/Products.tsx";
 import RetroProducts from "../customer/homeComponents/RetroProducts.tsx";
 import Brands from "../customer/homeComponents/Brands.tsx";
 import Footer from "../customer/staticComponents/Footer.tsx";
 import AdminBrandPage from "../../screens/sellerScreens/AdminBrandPage.tsx";
+import AdminProducts from "./adminHome/AdminProducts.tsx";
 
 function AdminMain() {
     const [currentSection, setCurrentSection] = useState('');
@@ -72,7 +72,7 @@ function AdminMain() {
 
                     <p className="para">Top Picks</p>
 
-                    <Products/>
+                    <AdminProducts/>
 
                     <div className="shoestab">
                         <div className="shoe">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/customer/header.css';
 
 interface HeaderProps {
@@ -43,6 +43,35 @@ function Header({ onSectionChange }: HeaderProps) {
         setIsDarkMode(!isDarkMode);
     };
 
+    const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const identifier = formData.get('identifier') as string;
+        const password = formData.get('password') as string;
+
+        // Your authentication logic here
+        const response = await fetch('http://localhost:8070/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ identifier, password }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.role === 'admin') {
+                navigateToPage('admin');
+            } else {
+                navigateToPage('customer');
+            }
+        } else {
+            alert('Invalid credentials');
+        }
+
+        closeForm();
+    };
+
     return (
         <header className="header">
             <div className="left-section">
@@ -79,9 +108,9 @@ function Header({ onSectionChange }: HeaderProps) {
                         {isLogin ? (
                             <>
                                 <h2>Login</h2>
-                                <form>
-                                    <label htmlFor="email">Email:</label>
-                                    <input type="email" id="email" name="email" required />
+                                <form onSubmit={handleLoginSubmit}>
+                                    <label htmlFor="identifier">Email or Username:</label>
+                                    <input type="text" id="identifier" name="identifier" required />
                                     <label htmlFor="password">Password:</label>
                                     <input type="password" id="password" name="password" required />
                                     <button type="submit">Login</button>
@@ -92,23 +121,28 @@ function Header({ onSectionChange }: HeaderProps) {
                             <>
                                 <h2>Signup</h2>
                                 <form>
-                                    <div className="names">
-                                        <div>
-                                            <label htmlFor="fname">First Name:</label>
-                                            <input type="text" id="fname" name="fname" required />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="lname">Last Name:</label>
-                                            <input type="text" id="lname" name="lname" required />
-                                        </div>
-                                    </div>
+                                    <label htmlFor="fullname">Full Name:</label>
+                                    <input type="text" id="fullname" name="fullname" required/>
+
+                                    <label htmlFor="contact">Contact:</label>
+                                    <input type="text" id="contact" name="contact" required/>
+
+                                    <label htmlFor="address">Address:</label>
+                                    <input type="text" id="address" name="address" required/>
+
+                                    <label htmlFor="signup-username">Username:</label>
+                                    <input type="text" id="signup-username" name="signup-username" required/>
+
                                     <label htmlFor="signup-email">Email:</label>
-                                    <input type="email" id="signup-email" name="signup-email" required />
+                                    <input type="email" id="signup-email" name="signup-email" required/>
+
                                     <label htmlFor="signup-password">Password:</label>
-                                    <input type="password" id="signup-password" name="signup-password" required />
+                                    <input type="password" id="signup-password" name="signup-password" required/>
+
                                     <button type="submit">Signup</button>
                                 </form>
-                                <p>Already a member? <span className="go-signup" onClick={switchToLogin}>Login</span></p>
+                                <p>Already a member? <span className="go-signup" onClick={switchToLogin}>Login</span>
+                                </p>
                             </>
                         )}
                     </div>

@@ -1,13 +1,15 @@
-import Header from '../components/customer/staticComponents/Header.tsx';
-import Main from '../components/customer/homeComponents/Main.tsx';
-import '../components/styles/customer/general.css';
-import '../components/styles/customer/footer.css';
-import Head from "../components/customer/staticComponents/Head.tsx";
-import { useState, useEffect } from "react";
-import BrandPage from "./customerScreens/BrandPage.tsx";
-import FootwearPage from "./customerScreens/FootwearPage.tsx";
-import ClothingPage from "./customerScreens/ClothingPage.tsx";
-import AboutPage from "./customerScreens/AboutPage.tsx";
+import { useState, useEffect } from 'react';
+import Header from '../../components/customer/staticComponents/Header';
+import Main from '../../components/customer/homeComponents/Main';
+import '../../components/styles/customer/general.css';
+import '../../components/styles/customer/footer.css';
+import Head from "../../components/customer/staticComponents/Head";
+import BrandPage from "../customerScreens/BrandPage";
+import FootwearPage from "../customerScreens/FootwearPage";
+import ClothingPage from "../customerScreens/ClothingPage";
+import AboutPage from "../customerScreens/AboutPage";
+import AdminHomePage from "../sellerScreens/AdminHomePage.tsx";
+import CustomerHomePage from "../customerScreens/CustomerHomePage.tsx";
 
 function HomePage() {
     const [currentSection, setCurrentSection] = useState('');
@@ -37,6 +39,12 @@ function HomePage() {
             break;
         case 'about':
             content = <AboutPage />;
+            break;
+        case 'admin':
+            content = <AdminHomePage />;
+            break;
+        case 'customer':
+            content = <CustomerHomePage />;
             break;
         default:
             content = <Main />;

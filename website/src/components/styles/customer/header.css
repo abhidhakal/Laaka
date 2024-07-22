@@ -133,7 +133,7 @@
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    transition: height 0.3s ease;
+    transition: width 0.4s ease, height 0.4s ease;
 }
 
 .auth-content.login {
@@ -142,8 +142,8 @@
 }
 
 .auth-content.signup {
-    height: 500px;
-    width: 400px;
+    height: fit-content;
+    width: 500px;
 }
 
 .close-btn {
@@ -183,6 +183,20 @@
     border-radius: 8px;
 }
 
+.auth-content.signup input[type="email"],
+.auth-content.signup input[type="password"],
+.auth-content.signup input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    display: inline-block;
+    border: 1px solid darkgray;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    align-self: center;
+}
+
 .auth-content button[type="submit"] {
     background-color: #99202a;
     color: white;
@@ -211,15 +225,6 @@
     color: #8ba2bd;
 }
 
-.names {
-    display: flex;
-    flex-direction: row;
-    gap: 10px; /* Space between first and last name fields */
-}
-
-.names > div {
-    flex: 1; /* Make first and last name fields take equal space */
-}
 .theme-switch {
     --toggle-size: 5px;
     --container-width: 60px;
