@@ -8,6 +8,9 @@ interface HeaderProps {
 function Header({ onSectionChange }: HeaderProps) {
     const [showForm, setShowForm] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
+    const [usernameOrEmail, setUsernameOrEmail] = useState(''); // Add state for usernameOrEmail
+    const [password, setPassword] = useState(''); // Add state for password
+
     const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
         const savedMode = localStorage.getItem('dark-mode');
         return savedMode === 'true' || false;
@@ -55,28 +58,30 @@ function Header({ onSectionChange }: HeaderProps) {
             address: formData.get('address') as string,
         };
 
-        const response = await fetch('http://localhost:8070/api/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(signupData),
-        });
+        try {
+            const response = await fetch('http://localhost:8070/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(signupData),
+            });
 
-        if (response.ok) {
-            alert('Signup successful, you can now login.');
-            switchToLogin();
-        } else {
-            const error = await response.text();
-            alert(`Signup failed: ${error}`);
+            if (response.ok) {
+                alert('Signup successful, you can now login.');
+                switchToLogin();
+            } else {
+                const error = await response.text();
+                alert(`Signup failed: ${error}`);
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+            alert('An error occurred during signup. Please try again.');
         }
     };
 
     const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const username = formData.get('identifier') as string;
-        const password = formData.get('password') as string;
 
         try {
             const response = await fetch('http://localhost:8070/api/auth/login', {
@@ -84,31 +89,43 @@ function Header({ onSectionChange }: HeaderProps) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({
+                    username: usernameOrEmail,
+                    password: password,
+                }),
             });
 
-            if (response.ok) {
-                // Check for specific username and password
-                if (username === 'admin' && password === 'password') {
-                    navigateToPage('admin');
-                } else {
-                    navigateToPage('customer');
-                }
-            } else {
-                const error = await response.text();
-                alert(`Login failed: ${error}`);
+            if (!response.ok) {
+                throw new Error('Invalid credentials');
             }
+
+            const data = await response.json();
+            console.log('Login successful:', data);
+
+            // Redirect based on role
+            if (data.role === 'admin') {
+                console.log('Redirecting to admin page');
+                navigateToPage('admin')
+                closeForm()
+                // Implement your redirect logic here, e.g.:
+                // navigate('/admin');
+            } else if (data.role === 'customer') {
+                console.log('Redirecting to customer page');
+                navigateToPage('customer')
+                closeForm()
+                // Implement your redirect logic here, e.g.:
+                // navigate('/customer');
+            }
+
+            // Clear the form
+            setUsernameOrEmail('');
+            setPassword('');
+
         } catch (error) {
             console.error('Error during login:', error);
-            alert('An error occurred. Please try again.');
+            // Handle login error (e.g., show error message to user)
         }
-
-        closeForm();
     };
-
-
-
-
 
     return (
         <header className="header">
@@ -148,9 +165,23 @@ function Header({ onSectionChange }: HeaderProps) {
                                 <h2>Login</h2>
                                 <form onSubmit={handleLoginSubmit}>
                                     <label htmlFor="identifier">Email or Username:</label>
-                                    <input type="text" id="identifier" name="identifier" required />
+                                    <input
+                                        type="text"
+                                        id="identifier"
+                                        name="identifier"
+                                        value={usernameOrEmail}
+                                        onChange={(e) => setUsernameOrEmail(e.target.value)}
+                                        required
+                                    />
                                     <label htmlFor="password">Password:</label>
-                                    <input type="password" id="password" name="password" required />
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
                                     <button type="submit">Login</button>
                                 </form>
                                 <p>Not a member yet? <span className="go-signup" onClick={switchToSignup}>Signup</span></p>
@@ -160,27 +191,26 @@ function Header({ onSectionChange }: HeaderProps) {
                                 <h2>Signup</h2>
                                 <form onSubmit={handleSignupSubmit}>
                                     <label htmlFor="fullname">Full Name:</label>
-                                    <input type="text" id="fullname" name="fullname" required/>
+                                    <input type="text" id="fullname" name="fullname" required />
 
                                     <label htmlFor="contact">Contact:</label>
-                                    <input type="text" id="contact" name="contact" required/>
+                                    <input type="text" id="contact" name="contact" required />
 
                                     <label htmlFor="address">Address:</label>
-                                    <input type="text" id="address" name="address" required/>
+                                    <input type="text" id="address" name="address" required />
 
                                     <label htmlFor="signup-username">Username:</label>
-                                    <input type="text" id="signup-username" name="signup-username" required/>
+                                    <input type="text" id="signup-username" name="signup-username" required />
 
                                     <label htmlFor="signup-email">Email:</label>
-                                    <input type="email" id="signup-email" name="signup-email" required/>
+                                    <input type="email" id="signup-email" name="signup-email" required />
 
                                     <label htmlFor="signup-password">Password:</label>
-                                    <input type="password" id="signup-password" name="signup-password" required/>
+                                    <input type="password" id="signup-password" name="signup-password" required />
 
                                     <button type="submit">Signup</button>
                                 </form>
-                                <p>Already a member? <span className="go-signup" onClick={switchToLogin}>Login</span>
-                                </p>
+                                <p>Already a member? <span className="go-signup" onClick={switchToLogin}>Login</span></p>
                             </>
                         )}
                     </div>

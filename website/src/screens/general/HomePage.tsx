@@ -3,7 +3,6 @@ import Header from '../../components/customer/staticComponents/Header';
 import Main from '../../components/customer/homeComponents/Main';
 import '../../components/styles/customer/general.css';
 import '../../components/styles/customer/footer.css';
-import Head from "../../components/customer/staticComponents/Head";
 import BrandPage from "../customerScreens/BrandPage";
 import FootwearPage from "../customerScreens/FootwearPage";
 import ClothingPage from "../customerScreens/ClothingPage";
@@ -52,15 +51,10 @@ function HomePage() {
 
     return (
         <>
-            <html lang="en">
-            <Head />
-            <body>
             <Header onSectionChange={navigatePage} />
             <main className="main">
                 {content}
             </main>
-            </body>
-            </html>
         </>
     );
 }

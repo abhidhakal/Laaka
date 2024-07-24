@@ -20,6 +20,10 @@ function AdminProducts() {
     const [trendingShoes, setTrendingShoes] = useState<Shoe[]>([]);
 
     useEffect(() => {
+        fetchTrendingShoes();
+    }, []);
+
+    const fetchTrendingShoes = () => {
         axios.get('http://localhost:8070/api/shoes/trending')
             .then(response => {
                 const data = response.data;
@@ -29,9 +33,7 @@ function AdminProducts() {
             .catch(error => {
                 console.error('Error fetching trending shoes:', error);
             });
-    }, []);
-
-
+    };
 
     const scrollLeft = () => {
         const productsDiv = document.querySelector('.adminproducts');
@@ -59,13 +61,13 @@ function AdminProducts() {
         axios.delete(`http://localhost:8070/api/shoes/${id}`)
             .then(response => {
                 console.log("Shoe deleted successfully", response);
+                // Refresh the list of shoes after deletion
+                fetchTrendingShoes();
             })
             .catch(error => {
                 console.error("Error deleting shoe:", error);
             });
-
     };
-
 
     return (
         <div className="adminproducts">
@@ -73,24 +75,21 @@ function AdminProducts() {
                 <img src="/assets/icons/left-arrow.svg" alt="Scroll Left" />
             </button>
 
-            {trendingShoes.map(shoe => {
-                console.log(`Rendering shoe:`, shoe); // Debugging line
-                return (
-                    <div className="adminproduct" key={shoe.shoeId}>
-                        <div className="imgdiv">
-                            <img className="imgg" src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
-                            <img
-                                className="deleteicon"
-                                src="/assets/icons/delete-icon.svg"
-                                alt="Delete"
-                                onClick={() => deleteShoe(shoe.shoeId)} // Ensure shoe.shoeId is passed
-                            />
-                            <img className="editicon" src="/assets/icons/edit-icon-product.svg" alt="Edit" />
-                        </div>
-                        <p>{shoe.name}</p>
+            {trendingShoes.map(shoe => (
+                <div className="adminproduct" key={shoe.shoeId}>
+                    <div className="imgdiv">
+                        <img className="imgg" src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
+                        <img
+                            className="deleteicon"
+                            src="/assets/icons/delete-icon.svg"
+                            alt="Delete"
+                            onClick={() => deleteShoe(shoe.shoeId)} // Ensure shoe.shoeId is passed
+                        />
+                        <img className="editicon" src="/assets/icons/edit-icon-product.svg" alt="Edit" />
                     </div>
-                );
-            })}
+                    <p>{shoe.name}</p>
+                </div>
+            ))}
 
             <button className="adminscroll-btn right" onClick={scrollRight}>
                 <img src="/assets/icons/right-arrow.svg" alt="Scroll Right" />
@@ -98,8 +97,5 @@ function AdminProducts() {
         </div>
     );
 }
-
-
-
 
 export default AdminProducts;

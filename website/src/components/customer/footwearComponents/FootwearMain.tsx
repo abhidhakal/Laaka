@@ -1,9 +1,16 @@
-import '../../styles/customer/about.css';
-
+import '../../styles/customer/footwear.css';
 import Footer from "../staticComponents/Footer.tsx";
-import {useEffect, useState} from "react";
-function FootwearMain() {
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
+interface Shoe {
+    id: number;
+    name: string;
+    imageUrl: string;
+    trending: boolean;
+}
+
+function FootwearMain() {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -12,6 +19,7 @@ function FootwearMain() {
     };
 
     const [showScrollButton, setShowScrollButton] = useState(false);
+    const [shoes, setShoes] = useState<Shoe[]>([]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,24 +32,50 @@ function FootwearMain() {
 
         window.addEventListener('scroll', handleScroll);
 
+        // Cleanup on unmount
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:8070/api/shoes')
+            .then(response => {
+                setShoes(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching shoes:', error);
+            });
+    }, []);
+
+    const getImageUrl = (imageUrl: string) => {
+        if (!imageUrl) return ''; // Return empty string or a placeholder image URL if no image
+        if (imageUrl.startsWith('http')) return imageUrl; // If it's already a full URL, use it as is
+        return `http://localhost:8070/images/${imageUrl}`;
+    };
+
     return (
-        <div className="about-frame">
-            <h1>Footwear</h1>
-            <Footer/>
+        <div className="footwear-frame">
+            <h1 className="footwear-title">Footwear</h1>
+            
+            <div className="shoe-grid">
+                {shoes.map(shoe => (
+                    <div className="footwears" key={shoe.id}>
+                        <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
+                        <p>{shoe.name}</p>
+                    </div>
+                ))}
+            </div>
+
+            <Footer />
 
             {showScrollButton && (
                 <button className="scroll-to-top-btn" onClick={scrollToTop}>
-                    <img src="../public/assets/images/arrow-up.svg" alt=""/>
+                    <img src="../public/assets/images/arrow-up.svg" alt="Scroll to top" />
                 </button>
             )}
-
         </div>
-    )
+    );
 }
 
 export default FootwearMain;
