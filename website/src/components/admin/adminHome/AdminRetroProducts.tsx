@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../../styles/customer/products.css';
+import '../../styles/admin/adminproducts.css';
 
 interface Shoe {
     id: number;
@@ -29,11 +29,11 @@ function RetroProducts() {
     };
 
     return (
-        <div className="products-retro">
+        <div className="admin-products-retro">
             {retroShoes.map(shoe => (
-                <div className="product-retro" key={shoe.id}>
+                <div className="admin-product-retro" key={shoe.id}>
                     <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
-                    <p className={"productname"}>{shoe.name}</p>
+                    <p className={"admin-productname"}>{shoe.name}</p>
                 </div>
             ))}
         </div>

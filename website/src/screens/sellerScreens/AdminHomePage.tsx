@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import AdminMain from "../../components/admin/AdminMain.tsx";
 import AdminBrandPage from "./AdminBrandPage.tsx";
 import AdminFootwearPage from "./AdminFootwearPage.tsx";
-import AdminClothingPage from "./AdminClothingPage.tsx";
 import AdminHeader from "../../components/admin/adminStatic/AdminHeader.tsx";
 import AdminAboutPage from "./AdminAboutPage.tsx";
 
@@ -30,9 +29,6 @@ function AdminHomePage() {
             break;
         case 'footwear':
             content = <AdminFootwearPage />;
-            break;
-        case 'clothing':
-            content = <AdminClothingPage />;
             break;
         case 'about':
             content = <AdminAboutPage />;

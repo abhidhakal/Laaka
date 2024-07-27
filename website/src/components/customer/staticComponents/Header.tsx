@@ -136,7 +136,6 @@ function Header({ onSectionChange }: HeaderProps) {
                 <p className="cats" onClick={() => navigateToPage('home')}>HOME</p>
                 <p className="cats" onClick={() => navigateToPage('brands')}>BRANDS</p>
                 <p className="cats" onClick={() => navigateToPage('footwear')}>FOOTWEAR</p>
-                <p className="cats" onClick={() => navigateToPage('clothing')}>CLOTHING</p>
                 <p className="cats" onClick={() => navigateToPage('about')}>ABOUT US</p>
             </div>
             <div className="right-section">

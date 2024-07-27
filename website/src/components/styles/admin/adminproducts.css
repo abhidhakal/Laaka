@@ -116,7 +116,7 @@
 }
 
 
-.product p {
+.adminproduct p {
     font-family: "Montserrat", monospace;
     font-size: 15px;
     font-weight: bold;
@@ -128,7 +128,7 @@
 /*    opacity: 60%;*/
 /*}*/
 
-.products-retro {
+.admin-products-retro {
     height: 500px;
     width: 100%;
     display: flex;
@@ -144,8 +144,8 @@
     padding-right: 8px;
 }
 
-.product-retro {
-    height: 250px;
+.admin-product-retro {
+    height: 300;
     width: 250px;
     box-shadow: 1px 1px 5px black;
     margin: 0;
@@ -159,20 +159,20 @@
     border-radius: 15px;
 }
 
-.product-retro img {
+.admin-product-retro img {
     height: 300px;
     width: 250px;
     border-radius: 15px;
     background-color: whitesmoke;
 }
 
-.productname {
+.admin-productname {
     font-family: 'Ubuntu Sans Mono', monospace;
     font-size: 18px;
     font-weight: bold;
 }
 
-.product-retro:hover {
+.admin-product-retro:hover {
     height: 300px;
     cursor: pointer;
     transition: 0.3s;

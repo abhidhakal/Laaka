@@ -5,7 +5,6 @@ import '../../components/styles/customer/general.css';
 import '../../components/styles/customer/footer.css';
 import BrandPage from "../customerScreens/BrandPage";
 import FootwearPage from "../customerScreens/FootwearPage";
-import ClothingPage from "../customerScreens/ClothingPage";
 import AboutPage from "../customerScreens/AboutPage";
 import AdminHomePage from "../sellerScreens/AdminHomePage.tsx";
 import CustomerHomePage from "../customerScreens/CustomerHomePage.tsx";
@@ -32,9 +31,6 @@ function HomePage() {
             break;
         case 'footwear':
             content = <FootwearPage />;
-            break;
-        case 'clothing':
-            content = <ClothingPage />;
             break;
         case 'about':
             content = <AboutPage />;

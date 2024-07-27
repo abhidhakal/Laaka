@@ -8,8 +8,6 @@ import BrandPage from "./BrandPage.tsx";
 // @ts-ignore
 import FootwearPage from "./FootwearPage.tsx";
 // @ts-ignore
-import ClothingPage from "./ClothingPage.tsx";
-// @ts-ignore
 import AboutPage from "./AboutPage.tsx";
 // @ts-ignore
 import Header from "../../components/customer/staticComponents/Header.tsx";
@@ -38,9 +36,6 @@ function HomePage() {
             break;
         case 'footwear':
             content = <FootwearPage />;
-            break;
-        case 'clothing':
-            content = <ClothingPage />;
             break;
         case 'about':
             content = <AboutPage />;
