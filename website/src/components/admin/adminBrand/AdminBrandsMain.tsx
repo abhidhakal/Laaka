@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import '../../styles/admin/adminbrandpage.css';
-import Footer from "../../customer/staticComponents/Footer.tsx";
+import Footer from "../../general/Footer.tsx";
 import AddBrandForm from "../adminStatic/AddBrandForm.tsx";
 
 interface Brand {

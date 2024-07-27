@@ -1,6 +1,6 @@
 import '../../styles/admin/adminbrandpage.css';
 
-import Footer from "../../customer/staticComponents/Footer.tsx";
+import Footer from "../../general/Footer.tsx";
 import {useEffect, useState} from "react";
 import AddShoeForm from "../adminStatic/AddShoeForm.tsx";
 function AdminFootwearMain() {

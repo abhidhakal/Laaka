@@ -10,7 +10,7 @@ import FootwearPage from "./FootwearPage.tsx";
 // @ts-ignore
 import AboutPage from "./AboutPage.tsx";
 // @ts-ignore
-import Header from "../../components/customer/staticComponents/Header.tsx";
+import Header from "../../components/general/Header.tsx";
 import CustomerHeader from "../../components/customer/staticComponents/CustomerHeader.tsx";
 
 

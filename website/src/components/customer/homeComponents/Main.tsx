@@ -4,7 +4,7 @@ import Products from "./Products.tsx";
 import RetroProducts from "./RetroProducts.tsx";
 import Category from "./Category.tsx";
 import Brands from "./Brands.tsx";
-import Footer from "../staticComponents/Footer.tsx";
+import Footer from "../../general/Footer.tsx";
 import BrandPage from "../../../screens/customerScreens/BrandPage.tsx";
 
 function Main() {

@@ -1,5 +1,5 @@
 import '../../styles/customer/footwear.css';
-import Footer from "../staticComponents/Footer.tsx";
+import Footer from "../../general/Footer.tsx";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 

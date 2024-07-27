@@ -1,5 +1,5 @@
 import '../styles/customer/about.css';
-import Footer from "../customer/staticComponents/Footer.tsx";
+import Footer from "../general/Footer.tsx";
 import {useEffect, useState} from "react";
 
 function AboutMain() {

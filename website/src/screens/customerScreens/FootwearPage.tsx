@@ -1,4 +1,4 @@
-import Header from '../../components/customer/staticComponents/Header.tsx';
+import Header from '../../components/general/Header.tsx';
 import '../../components/styles/customer/general.css';
 import '../../components/styles/customer/footer.css';
 import Head from "../../components/customer/staticComponents/Head.tsx";
