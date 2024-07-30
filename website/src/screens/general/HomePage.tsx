@@ -8,12 +8,19 @@ import FootwearPage from "../customerScreens/FootwearPage";
 import AboutPage from "../customerScreens/AboutPage";
 import AdminHomePage from "../sellerScreens/AdminHomePage.tsx";
 import CustomerHomePage from "../customerScreens/CustomerHomePage.tsx";
+import ShoeDetail from "../../components/general/ShoeDetail";
 
 function HomePage() {
     const [currentSection, setCurrentSection] = useState('');
+    const [selectedShoeId, setSelectedShoeId] = useState<number | null>(null);
 
     const navigatePage = (section: string) => {
         setCurrentSection(section);
+    };
+
+    const handleShoeClick = (id: number) => {
+        setSelectedShoeId(id);
+        setCurrentSection('shoeDetail');
     };
 
     useEffect(() => {
@@ -22,27 +29,31 @@ function HomePage() {
     }, [currentSection]);
 
     let content;
-    switch (currentSection) {
-        case 'home':
-            content = <Main />;
-            break;
-        case 'brands':
-            content = <BrandPage />;
-            break;
-        case 'footwear':
-            content = <FootwearPage />;
-            break;
-        case 'about':
-            content = <AboutPage />;
-            break;
-        case 'admin':
-            content = <AdminHomePage />;
-            break;
-        case 'customer':
-            content = <CustomerHomePage />;
-            break;
-        default:
-            content = <Main />;
+    if (currentSection === 'shoeDetail' && selectedShoeId !== null) {
+        content = <ShoeDetail id={selectedShoeId} />;
+    } else {
+        switch (currentSection) {
+            case 'home':
+                content = <Main onShoeClick={handleShoeClick} />;
+                break;
+            case 'brands':
+                content = <BrandPage />;
+                break;
+            case 'footwear':
+                content = <FootwearPage />;
+                break;
+            case 'about':
+                content = <AboutPage />;
+                break;
+            case 'admin':
+                content = <AdminHomePage />;
+                break;
+            case 'customer':
+                content = <CustomerHomePage />;
+                break;
+            default:
+                content = <Main onShoeClick={handleShoeClick} />;
+        }
     }
 
     return (

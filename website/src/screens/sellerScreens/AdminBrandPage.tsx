@@ -4,7 +4,6 @@ import {useState} from "react";
 import AboutPage from "../customerScreens/AboutPage.tsx";
 import AdminMain from "../../components/admin/AdminMain.tsx";
 import AdminFootwearPage from "./AdminFootwearPage.tsx";
-import AdminClothingPage from "./AdminClothingPage.tsx";
 import AdminBrandsMain from "../../components/admin/adminBrand/AdminBrandsMain.tsx";
 import AdminHeader from "../../components/admin/adminStatic/AdminHeader.tsx";
 
@@ -25,9 +24,6 @@ function AdminBrandPage() {
             break;
         case 'footwear':
             content = <AdminFootwearPage />;
-            break;
-        case 'clothing':
-            content = <AdminClothingPage />;
             break;
         case 'about':
             content = <AboutPage />;

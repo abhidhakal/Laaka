@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import '../styles/admin/adminmain.css';
-import RetroProducts from "../customer/homeComponents/RetroProducts.tsx";
 import Brands from "../customer/homeComponents/Brands.tsx";
 import Footer from "../general/Footer.tsx";
 import AdminBrandPage from "../../screens/sellerScreens/AdminBrandPage.tsx";
 import AdminProducts from "./adminHome/AdminProducts.tsx";
+import AdminRetroProducts from './adminHome/AdminRetroProducts.tsx';
 
 function AdminMain() {
     const [currentSection, setCurrentSection] = useState('');
@@ -112,7 +112,7 @@ function AdminMain() {
                     </div>
 
                     <p className="para-2">Walk Back In Time</p>
-                    <RetroProducts/>
+                    <AdminRetroProducts/>
 
                     <p className="para-4" onClick={() => navigateToPage('brands')}>Brands</p>
                     <Brands/>

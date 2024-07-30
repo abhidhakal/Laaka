@@ -1,0 +1,20 @@
+.shoe-detail-main{
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+    justify-content: center;
+    margin: 100px;
+    padding: 20px;
+
+    font-family: 'Monsterrat',monospace;
+}
+
+.shoe-detail-img {
+    height: 500px;
+    width: 450px;
+}
+
+.shoe-detail-info {
+    display: flex;
+    flex-direction: column;
+}

@@ -5,7 +5,6 @@ import {useState} from "react";
 import Main from "../../components/customer/homeComponents/Main.tsx";
 import BrandPage from "./BrandPage.tsx";
 import FootwearPage from "./FootwearPage.tsx";
-import ClothingPage from "./ClothingPage.tsx";
 import AboutMain from "../../components/aboutComponents/AboutMain.tsx";
 
 function AboutPage() {
@@ -25,9 +24,6 @@ function AboutPage() {
             break;
         case 'footwear':
             content = <FootwearPage/>;
-            break;
-        case 'clothing':
-            content = <ClothingPage/>;
             break;
         case 'about':
             content = <AboutPage/>;

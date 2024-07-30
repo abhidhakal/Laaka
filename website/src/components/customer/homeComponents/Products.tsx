@@ -3,18 +3,23 @@ import axios from 'axios';
 import '../../styles/customer/products.css';
 
 interface Shoe {
-    id: number;
+    shoeId: number; // Adjusted to match the API response
     name: string;
     imageUrl: string;
     trending: boolean;
 }
 
-function Products() {
+interface ProductsProps {
+    onShoeClick: (id: number) => void;
+}
+
+function Products({ onShoeClick }: ProductsProps) {
     const [trendingShoes, setTrendingShoes] = useState<Shoe[]>([]);
 
     useEffect(() => {
         axios.get('http://localhost:8070/api/shoes/trending')
             .then(response => {
+                console.log('Trending shoes response:', response.data);
                 setTrendingShoes(response.data);
             })
             .catch(error => {
@@ -33,9 +38,18 @@ function Products() {
     };
 
     const getImageUrl = (imageUrl: string) => {
-        if (!imageUrl) return ''; // Return empty string or a placeholder image URL if no image
-        if (imageUrl.startsWith('http')) return imageUrl; // If it's already a full URL, use it as is
+        if (!imageUrl) return '';
+        if (imageUrl.startsWith('http')) return imageUrl;
         return `http://localhost:8070/images/${imageUrl}`;
+    };
+
+    const handleShoeClick = (id: number) => {
+        console.log(`Products: handleShoeClick called with ID ${id}`);
+        if (id !== undefined && id !== null) {
+            onShoeClick(id);
+        } else {
+            console.error('Invalid shoe ID:', id);
+        }
     };
 
     return (
@@ -44,12 +58,19 @@ function Products() {
                 <img src="/assets/icons/left-arrow.svg" alt="Scroll Left" />
             </button>
 
-            {trendingShoes.map(shoe => (
-                <div className="product" key={shoe.id}>
-                    <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
-                    <p>{shoe.name}</p>
-                </div>
-            ))}
+            {trendingShoes.map(shoe => {
+                console.log('Shoe object:', shoe); // Check the console to see if `shoeId` is present
+                return (
+                    <div
+                        className="product"
+                        key={shoe.shoeId} // Adjusted to match the API response
+                        onClick={() => handleShoeClick(shoe.shoeId)} // Adjusted to match the API response
+                    >
+                        <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
+                        <p>{shoe.name}</p>
+                    </div>
+                );
+            })}
 
             <button className="scroll-btn right" onClick={scrollRight}>
                 <img src="/assets/icons/right-arrow.svg" alt="Scroll Right" />

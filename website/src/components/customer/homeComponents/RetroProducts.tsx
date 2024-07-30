@@ -3,13 +3,17 @@ import axios from 'axios';
 import '../../styles/customer/products.css';
 
 interface Shoe {
-    id: number;
+    shoeId: number; // Adjusted to match the API response
     name: string;
     imageUrl: string;
     category: string;
 }
 
-function RetroProducts() {
+interface RetroProductsProps {
+    onShoeClick: (id: number) => void;
+}
+
+function RetroProducts({ onShoeClick }: RetroProductsProps) {
     const [retroShoes, setRetroShoes] = useState<Shoe[]>([]);
 
     useEffect(() => {
@@ -23,15 +27,23 @@ function RetroProducts() {
     }, []);
 
     const getImageUrl = (imageUrl: string) => {
-        if (!imageUrl) return ''; // Return empty string or a placeholder image URL if no image
-        if (imageUrl.startsWith('http')) return imageUrl; // If it's already a full URL, use it as is
+        if (!imageUrl) return '';
+        if (imageUrl.startsWith('http')) return imageUrl;
         return `http://localhost:8070/images/${imageUrl}`;
+    };
+
+    const handleShoeClick = (id: number) => {
+        onShoeClick(id);
     };
 
     return (
         <div className="products-retro">
             {retroShoes.map(shoe => (
-                <div className="product-retro" key={shoe.id}>
+                <div
+                    className="product-retro"
+                    key={shoe.shoeId} // Adjusted to match the API response
+                    onClick={() => handleShoeClick(shoe.shoeId)} // Adjusted to match the API response
+                >
                     <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
                     <p className={"productname"}>{shoe.name}</p>
                 </div>

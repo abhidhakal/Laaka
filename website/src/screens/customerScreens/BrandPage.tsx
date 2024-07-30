@@ -4,7 +4,6 @@ import '../../components/styles/customer/footer.css';
 import Head from "../../components/customer/staticComponents/Head.tsx";
 import {useState} from "react";
 import Main from "../../components/customer/homeComponents/Main.tsx";
-import ClothingPage from "./ClothingPage.tsx";
 import AboutPage from "./AboutPage.tsx";
 import FootwearPage from "./FootwearPage.tsx";
 import BrandsMain from "../../components/customer/brandComponents/BrandsMain.tsx";
@@ -26,9 +25,6 @@ function BrandPage() {
             break;
         case 'footwear':
             content = <FootwearPage />;
-            break;
-        case 'clothing':
-            content = <ClothingPage />;
             break;
         case 'about':
             content = <AboutPage />;

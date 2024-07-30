@@ -4,20 +4,17 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 interface Shoe {
-    id: number;
+    shoeId: number;
     name: string;
     imageUrl: string;
     trending: boolean;
 }
 
-function FootwearMain() {
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth" // Smooth scrolling animation
-        });
-    };
+interface FootwearMainProps {
+    onShoeClick: (id: number) => void; // Prop to handle shoe click
+}
 
+function FootwearMain({ onShoeClick }: FootwearMainProps) {
     const [showScrollButton, setShowScrollButton] = useState(false);
     const [shoes, setShoes] = useState<Shoe[]>([]);
 
@@ -57,10 +54,14 @@ function FootwearMain() {
     return (
         <div className="footwear-frame">
             <h1 className="footwear-title">Footwear</h1>
-            
+
             <div className="shoe-grid">
                 {shoes.map(shoe => (
-                    <div className="footwears" key={shoe.id}>
+                    <div
+                        className="footwears"
+                        key={shoe.shoeId}
+                        onClick={() => onShoeClick(shoe.shoeId)}
+                    >
                         <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
                         <p>{shoe.name}</p>
                     </div>
@@ -70,7 +71,7 @@ function FootwearMain() {
             <Footer />
 
             {showScrollButton && (
-                <button className="scroll-to-top-btn" onClick={scrollToTop}>
+                <button className="scroll-to-top-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                     <img src="../public/assets/images/arrow-up.svg" alt="Scroll to top" />
                 </button>
             )}

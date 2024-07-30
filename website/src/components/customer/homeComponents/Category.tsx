@@ -22,11 +22,6 @@ function Category() {
                     <img src="../public/assets/images/af1-categ.png" alt="shoes"/>
                     <div className="footwear">Footwear</div>
                 </div>
-
-                <div className="category-brands">
-                    <img src="../public/assets/images/tshirt.avif" alt="tshirt"/>
-                    <div className="clothing">Clothing</div>
-                </div>
             </div>
         </div>
     )

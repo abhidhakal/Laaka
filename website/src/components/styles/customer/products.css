@@ -109,7 +109,7 @@
 }
 
 .product-retro {
-    height: 300px;
+    height: 250px;
     width: 250px;
     box-shadow: 1px 1px 5px black;
 
@@ -129,10 +129,11 @@
 }
 
 .product-retro img {
-    height: 300px;
+    height: 250px;
     width: 250px;
     border-radius: 15px;
     background-color: whitesmoke;
+    object-fit: cover;
 }
 
 .productname {

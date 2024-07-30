@@ -12,6 +12,7 @@ interface Shoe {
 function RetroProducts() {
     const [retroShoes, setRetroShoes] = useState<Shoe[]>([]);
 
+
     useEffect(() => {
         axios.get('http://localhost:8070/api/shoes/category/Retro')
             .then(response => {
@@ -32,7 +33,8 @@ function RetroProducts() {
         <div className="admin-products-retro">
             {retroShoes.map(shoe => (
                 <div className="admin-product-retro" key={shoe.id}>
-                    <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
+                        <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
+                    
                     <p className={"admin-productname"}>{shoe.name}</p>
                 </div>
             ))}

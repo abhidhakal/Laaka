@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/customer/header.css';
+import '../styles/customer/header.css';
 
 interface HeaderProps {
     onSectionChange: (section: string) => void;
