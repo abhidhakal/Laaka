@@ -7,7 +7,7 @@ interface ShoeDetailProps {
 }
 
 interface Shoe {
-    id: number;
+    shoeId: number;
     name: string;
     imageUrl: string;
     description: string;
@@ -54,39 +54,48 @@ function ShoeDetail({ id }: ShoeDetailProps) {
     };
 
     const handleFormSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const orderData = {
-            user: { name: userName },
-            orderItems: [{
-                shoe: shoe,
-                quantity: quantity,
-                price: shoe ? shoe.price * quantity : 0,
-                size: size
-            }],
-            totalPrice: shoe ? shoe.price * quantity : 0,
-            orderStatus: 'Pending',
-            billingAddress: billingAddress,
-            paymentMethod: paymentMethod
-        };
+    e.preventDefault();
+    if (!shoe) return;
 
-        axios.post('http://localhost:8070/api/orders', orderData)
-            .then(response => {
-                console.log('Order created:', response.data);
-                setShowPopup(false);
-            })
-            .catch(error => {
-                console.error('Error creating order:', error);
-            });
+    const orderData = {
+        orderItems: [
+            {
+                shoe: { id: shoe.shoeId },
+                quantity: quantity,
+                price: shoe.price * quantity,
+                size: size
+            }
+        ],
+        totalPrice: shoe.price * quantity,
+        orderStatus: 'Pending',
+        billingAddress: billingAddress,
+        paymentMethod: paymentMethod
     };
+
+    console.log('Order Data:', orderData);  // Log order data before sending request
+
+    axios.post('http://localhost:8070/api/orders', orderData)
+        .then(response => {
+            console.log('Order created:', response.data);
+            setShowPopup(false);
+        })
+        .catch(error => {
+            console.error('Error creating order:', error);
+            if (error.response) {
+                console.error('Error response data:', error.response.data);
+            }
+        });
+};
+
 
     const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const method = e.target.value;
         setPaymentMethod(method);
         if (method === 'Esewa') {
-            setPaymentImage("../public/assets/images/payment/qr/esewa_qr.jpg");
+            setPaymentImage('/assets/images/payment/qr/esewa_qr.jpg');
             setShowPaymentPopup(true);
-        } else if(method === 'Khalti'){
-            setPaymentImage("../public/assets/images/payment/qr/khalti_qr.png");
+        } else if (method === 'Khalti') {
+            setPaymentImage('/assets/images/payment/qr/khalti_qr.png');
             setShowPaymentPopup(true);
         }
     };
@@ -115,15 +124,16 @@ function ShoeDetail({ id }: ShoeDetailProps) {
             </div>
             <div className="payment-options">
                 <p>Pay Using: </p>
-                <img className="payment-img" src="../public/assets/images/payment/esewa.webp" alt="Esewa" />
-                <img className="payment-img" src="../public/assets/images/payment/khalti.png" alt="Khalti" />
-                <img className="payment-img" src="../public/assets/images/payment/visa.jpeg" alt="VISA" />
-                <img className="payment-img" src="../public/assets/images/payment/cod.svg" alt="COD" />
+                <img className="payment-img" src='/assets/images/payment/esewa.webp' alt="Esewa" />
+                <img className="payment-img" src='/assets/images/payment/khalti.png' alt="Khalti" />
+                <img className="payment-img" src='/assets/images/payment/visa.jpeg' alt="VISA" />
+                <img className="payment-img" src='/assets/images/payment/cod.svg' alt="COD" />
             </div>
 
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup-content">
+                    <span className="close-btn" onClick={() => setShowPopup(false)}>&times;</span>
                         <h2>Order Details</h2>
                         <form onSubmit={handleFormSubmit}>
                             <div className="form-flex">
@@ -132,8 +142,7 @@ function ShoeDetail({ id }: ShoeDetailProps) {
                             </div>
                             <div className="form-flex">
                                 <label className="form-label">Size:</label>
-                                <select className="form-select" value={size} onChange={(e) => setSize(e.target.value)}
-                                        required>
+                                <select className="form-select" value={size} onChange={(e) => setSize(e.target.value)} required>
                                     <option value="" disabled>Select Size</option>
                                     {[...Array(11).keys()].map(i => {
                                         const sizeValue = 35 + i;
@@ -146,8 +155,7 @@ function ShoeDetail({ id }: ShoeDetailProps) {
 
                             <div className="form-flex">
                                 <label className="form-label">Full Name:</label>
-                                <input className="form-input" type="text" value={userName}
-                                       onChange={(e) => setUserName(e.target.value)} required/>
+                                <input className="form-input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
                             </div>
                             <div className="form-flex">
                                 <label className="form-label">Billing Address:</label>
@@ -165,7 +173,7 @@ function ShoeDetail({ id }: ShoeDetailProps) {
                             </div>
                             <button className="form-btn" type="submit">Confirm Order</button>
                         </form>
-                        <button className="form-btn" onClick={() => setShowPopup(false)}>Cancel</button>
+                        
                     </div>
                 </div>
             )}

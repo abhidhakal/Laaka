@@ -91,6 +91,7 @@
     align-self: center;
     column-gap: 50px;
     border: 1px solid gray;
+    margin-bottom: 30px;
 }
 
 .payment-options p {
@@ -167,7 +168,7 @@
     background-color: #99202a;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 24px 0;
     border: none;
     cursor: pointer;
     width: 40%;
@@ -180,7 +181,6 @@
     font-weight: 500;
 }
 
-/* shoedetail.css */
 .payment-popup-overlay {
     position: fixed;
     top: 0;
@@ -223,4 +223,19 @@
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.close-btn {
+    color: gray;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

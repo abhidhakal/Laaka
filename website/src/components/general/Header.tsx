@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/customer/header.css';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
     onSectionChange: (section: string) => void;
@@ -8,8 +9,8 @@ interface HeaderProps {
 function Header({ onSectionChange }: HeaderProps) {
     const [showForm, setShowForm] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
-    const [usernameOrEmail, setUsernameOrEmail] = useState(''); // Add state for usernameOrEmail
-    const [password, setPassword] = useState(''); // Add state for password
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
         const savedMode = localStorage.getItem('dark-mode');
@@ -38,6 +39,8 @@ function Header({ onSectionChange }: HeaderProps) {
         setIsLogin(true);
     };
 
+    const navigate = useNavigate();
+
     const navigateToPage = (section: string) => {
         onSectionChange(section);
     };
@@ -50,7 +53,6 @@ function Header({ onSectionChange }: HeaderProps) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const signupData = {
-            username: formData.get('signup-username') as string,
             email: formData.get('signup-email') as string,
             password: formData.get('signup-password') as string,
             fullname: formData.get('fullname') as string,
@@ -80,50 +82,41 @@ function Header({ onSectionChange }: HeaderProps) {
         }
     };
 
-    const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
+    const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         try {
             const response = await fetch('http://localhost:8070/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    username: usernameOrEmail,
-                    password: password,
-                }),
+                body: JSON.stringify({ email, password }),
+                credentials: 'include',
             });
 
+            const responseText = await response.text();
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (error) {
+                console.error('Error parsing response:', responseText);
+                throw new Error(`Invalid response from server: ${responseText}`);
+            }
+
             if (!response.ok) {
-                throw new Error('Invalid credentials');
+                console.error('Login error:', data.message || responseText);
+                throw new Error(data.message || 'Login failed');
             }
 
-            const data = await response.json();
-            console.log('Login successful:', data);
-
-            // Redirect based on role
-            if (data.role === 'admin') {
-                console.log('Redirecting to admin page');
-                navigateToPage('admin')
-                closeForm()
-                // Implement your redirect logic here, e.g.:
-                // navigate('/admin');
-            } else if (data.role === 'customer') {
-                console.log('Redirecting to customer page');
-                navigateToPage('customer')
-                closeForm()
-                // Implement your redirect logic here, e.g.:
-                // navigate('/customer');
+            if (email === 'admin@laaka.np') {
+                navigate('/admin');
+            } else if (email === 'customer@gmail.com') {
+                navigate('/customer');
             }
-
-            // Clear the form
-            setUsernameOrEmail('');
-            setPassword('');
 
         } catch (error) {
             console.error('Error during login:', error);
-            // Handle login error (e.g., show error message to user)
+            alert('Login failed: ' + (error as Error).message);
         }
     };
 
@@ -163,13 +156,13 @@ function Header({ onSectionChange }: HeaderProps) {
                             <>
                                 <h2>Login</h2>
                                 <form onSubmit={handleLoginSubmit}>
-                                    <label htmlFor="identifier">Email or Username:</label>
+                                    <label htmlFor="email">Email:</label>
                                     <input
-                                        type="text"
-                                        id="identifier"
-                                        name="identifier"
-                                        value={usernameOrEmail}
-                                        onChange={(e) => setUsernameOrEmail(e.target.value)}
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
                                     <label htmlFor="password">Password:</label>
@@ -197,9 +190,6 @@ function Header({ onSectionChange }: HeaderProps) {
 
                                     <label htmlFor="address">Address:</label>
                                     <input type="text" id="address" name="address" required />
-
-                                    <label htmlFor="signup-username">Username:</label>
-                                    <input type="text" id="signup-username" name="signup-username" required />
 
                                     <label htmlFor="signup-email">Email:</label>
                                     <input type="email" id="signup-email" name="signup-email" required />
