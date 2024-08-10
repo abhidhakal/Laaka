@@ -29,7 +29,7 @@ function FootwearPage() {
     } else {
         switch (currentSection) {
             case 'home':
-                content = <Main onShoeClick={handleShoeClick} />;
+                content = <Main/>;
                 break;
             case 'brands':
                 content = <BrandPage />;

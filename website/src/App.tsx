@@ -5,7 +5,6 @@ import FootwearPage from './screens/customerScreens/FootwearPage';
 import AboutPage from './screens/customerScreens/AboutPage';
 import AdminHomePage from './screens/sellerScreens/AdminHomePage';
 import CustomerHomePage from './screens/customerScreens/CustomerHomePage';
-import ShoeDetail from './components/general/ShoeDetail';
 
 function App() {
     return (
@@ -17,7 +16,6 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/admin" element={<AdminHomePage />} />
                 <Route path="/customer" element={<CustomerHomePage />} />
-                <Route path="/shoeDetail/:id" element={<ShoeDetail id={0} />} />
             </Routes>
         </Router>
     );

@@ -8,20 +8,18 @@ import Footer from "../../general/Footer";
 import BrandPage from "../../../screens/customerScreens/BrandPage";
 import ShoeDetail from "../../general/ShoeDetail";
 
-interface MainProps {
-    onShoeClick: (id: number) => void;
-}
-
-function Main({ onShoeClick }: MainProps) {
-    const [currentSection, setCurrentSection] = useState('');
+function Main() {
+    const [currentSection, setCurrentSection] = useState('main');
     const [selectedShoeId, setSelectedShoeId] = useState<number | null>(null);
 
     const [images] = useState<string[]>([
         "../public/assets/images/adidasspezial.png",
         "../public/assets/images/slider.avif",
+        "../public/assets/images/nikedunks.png",
         "../public/assets/images/adidasshoes.avif"
     ]);
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+    const [fadeTransition, setFadeTransition] = useState<boolean>(false);
 
     const navigateToPage = (section: string) => {
         setCurrentSection(section);
@@ -30,7 +28,7 @@ function Main({ onShoeClick }: MainProps) {
     const handleShoeClick = (id: number) => {
         console.log(`Main: handleShoeClick called with ID ${id}`);
         setSelectedShoeId(id);
-        onShoeClick(id);
+        setCurrentSection('shoeDetail');
     };
 
     const scrollToTop = () => {
@@ -58,35 +56,37 @@ function Main({ onShoeClick }: MainProps) {
         };
     }, []);
 
-    useEffect(() => {
-        console.log('Selected shoe ID updated:', selectedShoeId);
-    }, [selectedShoeId]);
-
-    // Functions to handle image changes
+    // Functions to handle image changes with smooth transitions
     const displayNextImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+        setFadeTransition(true);
+        setTimeout(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+            setFadeTransition(false);
+        }, 500);
     };
 
     const displayPreviousImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex <= 0 ? images.length - 1 : prevIndex - 1));
+        setFadeTransition(true);
+        setTimeout(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex <= 0 ? images.length - 1 : prevIndex - 1));
+            setFadeTransition(false);
+        }, 500);
     };
 
     useEffect(() => {
-        const intervalId = setInterval(displayNextImage, 5000);
+        const intervalId = setInterval(displayNextImage, 4000);
         return () => clearInterval(intervalId);
     }, []);
 
     let content;
-    if (selectedShoeId !== null) {
-        console.log(`Rendering ShoeDetail with ID: ${selectedShoeId}`);
+    if (currentSection === 'shoeDetail' && selectedShoeId !== null) {
         content = <ShoeDetail id={selectedShoeId} />;
     } else {
-        console.log('No shoe selected, rendering default content');
         switch (currentSection) {
             case 'brands':
                 content = <BrandPage />;
                 break;
-
+            case 'main':
             default:
                 content = (
                     <div>
@@ -94,7 +94,11 @@ function Main({ onShoeClick }: MainProps) {
                             <button className="left-right-btn" onClick={displayPreviousImage}>
                                 <img src="/assets/icons/left-arrow.svg" alt="Scroll Left"/>
                             </button>
-                            <img className="main-image" src={images[currentImageIndex]} alt="Slideshow"/>
+                            <img
+                                className={`main-image ${fadeTransition ? 'fade' : ''}`}
+                                src={images[currentImageIndex]}
+                                alt="Slideshow"
+                            />
                             <button className="left-right-btn" onClick={displayNextImage}>
                                 <img src="/assets/icons/right-arrow.svg" alt="Scroll Right"/>
                             </button>
@@ -105,7 +109,40 @@ function Main({ onShoeClick }: MainProps) {
                         <Products onShoeClick={handleShoeClick} />
 
                         <div className="shoestab">
-                            {/* ...existing content */}
+                            <div className="shoe">
+                                <img className="shoestab-img" src="../public/assets/images/dunk-img.webp" alt=""/>
+                                <div className="shoe-info">
+                                    <p>Nike Dunks</p>
+                                </div>
+                            </div>
+
+                            <div className="shoe">
+                                <img className="shoestab-img" src="../public/assets/images/adidas-tee.avif" alt=""/>
+                                <div className="shoe-info">
+                                    <p>Adidas Tees</p>
+                                </div>
+                            </div>
+
+                            <div className="shoe">
+                                <img className="shoestab-img" src="../public/assets/images/airmax.png" alt=""/>
+                                <div className="shoe-info">
+                                    <p>Nike Air-Max</p>
+                                </div>
+                            </div>
+
+                            <div className="shoe">
+                                <img className="shoestab-img" src="../public/assets/images/nb-shoe.jpg" alt=""/>
+                                <div className="shoe-info">
+                                    <p>New Balance</p>
+                                </div>
+                            </div>
+
+                            <div className="shoe">
+                                <img className="shoestab-img" src="../public/assets/images/hoodie.webp" alt=""/>
+                                <div className="shoe-info">
+                                    <p>Jordan Hoodies</p>
+                                </div>
+                            </div>
                         </div>
 
                         <p className="para-2">Walk Back In Time</p>
