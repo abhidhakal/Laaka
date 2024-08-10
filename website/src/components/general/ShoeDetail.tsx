@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import '../styles/customer/shoedetail.css';
+import axios from "axios";
 
 interface ShoeDetailProps {
     id: number;
@@ -25,9 +25,11 @@ function ShoeDetail({ id }: ShoeDetailProps) {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [showPaymentPopup, setShowPaymentPopup] = useState(false);
     const [paymentImage, setPaymentImage] = useState('');
+    const [orderSuccessPopup, setOrderSuccessPopup] = useState(false);
 
     useEffect(() => {
         if (id) {
+            // Fetch shoe details from API
             axios.get(`http://localhost:8070/api/shoes/${id}`)
                 .then(response => {
                     console.log('Shoe details response:', response.data);
@@ -54,39 +56,20 @@ function ShoeDetail({ id }: ShoeDetailProps) {
     };
 
     const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!shoe) return;
+        e.preventDefault();
 
-    const orderData = {
-        orderItems: [
-            {
-                shoe: { id: shoe.shoeId },
-                quantity: quantity,
-                price: shoe.price * quantity,
-                size: size
-            }
-        ],
-        totalPrice: shoe.price * quantity,
-        orderStatus: 'Pending',
-        billingAddress: billingAddress,
-        paymentMethod: paymentMethod
-    };
-
-    console.log('Order Data:', orderData);  // Log order data before sending request
-
-    axios.post('http://localhost:8070/api/orders', orderData)
-        .then(response => {
-            console.log('Order created:', response.data);
-            setShowPopup(false);
-        })
-        .catch(error => {
-            console.error('Error creating order:', error);
-            if (error.response) {
-                console.error('Error response data:', error.response.data);
-            }
+        console.log('Order Details:', {
+            shoeId: shoe?.shoeId,
+            quantity,
+            size,
+            userName,
+            billingAddress,
+            paymentMethod
         });
-};
 
+        setShowPopup(false);
+        setOrderSuccessPopup(true);
+    };
 
     const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const method = e.target.value;
@@ -100,59 +83,53 @@ function ShoeDetail({ id }: ShoeDetailProps) {
         }
     };
 
-    if (!shoe) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div className="shoe-main-frame">
-            <div className="shoe-detail-main">
-                <img className="shoe-detail-img" src={`http://localhost:8070/images/${shoe.imageUrl}`} alt={shoe.name} />
-                <div className="shoe-detail-info">
-                    <div>
-                        <h1 className="shoe-detail-title">{shoe.name}</h1>
-                        <p className="shoe-detail-description">{shoe.description}</p>
-                        <p className="shoe-detail-price">Price: NRs {shoe.price}</p>
-                        <p className="shoe-detail-price">Stock: {getStockStatus(shoe.stock)}</p>
+            {shoe ? (
+                <>
+                    <div className="shoe-detail-main">
+                        <img className="shoe-detail-img" src={`http://localhost:8070/images/${shoe.imageUrl}`} alt={shoe.name} />
+                        <div className="shoe-detail-info">
+                            <h1 className="shoe-detail-title">{shoe.name}</h1>
+                            <p className="shoe-detail-price">Price: NRs {shoe.price}</p>
+                            <p className="shoe-detail-price">Stock: {getStockStatus(shoe.stock)}</p>
+                            <div className="shoe-detail-order">
+                                <button className="order-product-btn" onClick={handleOrderNowClick}>Order Now</button>
+                                <button className="cart-product-btn">Add To Cart</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="shoe-detail-order">
-                        <button className="order-product-btn" onClick={handleOrderNowClick}>Order Now</button>
-                        <button className="cart-product-btn">Add To Cart</button>
+                    <div className="payment-options">
+                        <p>Pay Using: </p>
+                        <img className="payment-img" src='/assets/images/payment/esewa.webp' alt="Esewa" />
+                        <img className="payment-img" src='/assets/images/payment/khalti.png' alt="Khalti" />
+                        <img className="payment-img" src='/assets/images/payment/visa.jpeg' alt="VISA" />
+                        <img className="payment-img" src='/assets/images/payment/cod.svg' alt="COD" />
                     </div>
-                </div>
-            </div>
-            <div className="payment-options">
-                <p>Pay Using: </p>
-                <img className="payment-img" src='/assets/images/payment/esewa.webp' alt="Esewa" />
-                <img className="payment-img" src='/assets/images/payment/khalti.png' alt="Khalti" />
-                <img className="payment-img" src='/assets/images/payment/visa.jpeg' alt="VISA" />
-                <img className="payment-img" src='/assets/images/payment/cod.svg' alt="COD" />
-            </div>
+                </>
+            ) : (
+                <div>Loading...</div>
+            )}
 
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                    <span className="close-btn" onClick={() => setShowPopup(false)}>&times;</span>
+                        <span className="close-btn" onClick={() => setShowPopup(false)}>&times;</span>
                         <h2>Order Details</h2>
                         <form onSubmit={handleFormSubmit}>
                             <div className="form-flex">
                                 <label className="form-label">Quantity:</label>
-                                <input className="form-input" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} min="1" max={shoe.stock} required />
+                                <input className="form-input" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} min="1" max={shoe?.stock} required />
                             </div>
                             <div className="form-flex">
                                 <label className="form-label">Size:</label>
                                 <select className="form-select" value={size} onChange={(e) => setSize(e.target.value)} required>
                                     <option value="" disabled>Select Size</option>
-                                    {[...Array(11).keys()].map(i => {
-                                        const sizeValue = 35 + i;
-                                        return (
-                                            <option key={sizeValue} value={sizeValue}>{sizeValue}</option>
-                                        );
-                                    })}
+                                    {[...Array(11).keys()].map(i => (
+                                        <option key={35 + i} value={35 + i}>{35 + i}</option>
+                                    ))}
                                 </select>
                             </div>
-
                             <div className="form-flex">
                                 <label className="form-label">Full Name:</label>
                                 <input className="form-input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
@@ -173,7 +150,16 @@ function ShoeDetail({ id }: ShoeDetailProps) {
                             </div>
                             <button className="form-btn" type="submit">Confirm Order</button>
                         </form>
-                        
+                    </div>
+                </div>
+            )}
+
+            {orderSuccessPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        <span className="close-btn" onClick={() => setOrderSuccessPopup(false)}>&times;</span>
+                        <h2>Order Successful!</h2>
+                        <p>Your order has been placed successfully.</p>
                     </div>
                 </div>
             )}

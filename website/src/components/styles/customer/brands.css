@@ -31,6 +31,6 @@
     transition: 0.3s;
 }
 
-.brand-logo:hover {
+.brand:hover .brand-logo:hover {
     height: 150px;
 }

@@ -64,7 +64,7 @@ function Products({ onShoeClick }: ProductsProps) {
                     <div
                         className="product"
                         key={shoe.shoeId} // Adjusted to match the API response
-                        onClick={() => handleShoeClick(shoe.shoeId)} // Adjusted to match the API response
+                        onClick={() => handleShoeClick(shoe.shoeId)}
                     >
                         <img src={getImageUrl(shoe.imageUrl)} alt={shoe.name} />
                         <p>{shoe.name}</p>

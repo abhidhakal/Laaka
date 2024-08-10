@@ -110,7 +110,7 @@
 
 .product-retro {
     height: 250px;
-    width: 250px;
+    width: 300px;
     box-shadow: 1px 1px 5px black;
 
     margin: 0;
@@ -130,7 +130,7 @@
 
 .product-retro img {
     height: 250px;
-    width: 250px;
+    width: 300px;
     border-radius: 15px;
     background-color: whitesmoke;
     object-fit: cover;

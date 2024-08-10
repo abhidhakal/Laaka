@@ -49,17 +49,20 @@ function Header({ onSectionChange }: HeaderProps) {
         setIsDarkMode(!isDarkMode);
     };
 
+    const [signupData, setSignupData] = useState({
+        email: '',
+        password: '',
+        fullname: '',
+        contact: '',
+        address: '',
+    });
+
+    const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSignupData({ ...signupData, [e.target.name]: e.target.value });
+    };
+
     const handleSignupSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const signupData = {
-            email: formData.get('signup-email') as string,
-            password: formData.get('signup-password') as string,
-            fullname: formData.get('fullname') as string,
-            contact: formData.get('contact') as string,
-            address: formData.get('address') as string,
-        };
-
         try {
             const response = await fetch('http://localhost:8070/api/auth/signup', {
                 method: 'POST',
@@ -94,31 +97,20 @@ function Header({ onSectionChange }: HeaderProps) {
                 credentials: 'include',
             });
 
-            const responseText = await response.text();
-            let data;
-            try {
-                data = JSON.parse(responseText);
-            } catch (error) {
-                console.error('Error parsing response:', responseText);
-                throw new Error(`Invalid response from server: ${responseText}`);
+            if (response.ok) {
+                const data = await response.json(); // Parse JSON only if the response is OK
+                localStorage.setItem('token', data.token);
+                navigate(email === 'admin@laaka.np' ? '/admin' : '/customer');
+            } else {
+                const errorMessage = await response.text(); // Get the error message as text
+                alert(`Login failed: ${errorMessage}`);
             }
-
-            if (!response.ok) {
-                console.error('Login error:', data.message || responseText);
-                throw new Error(data.message || 'Login failed');
-            }
-
-            if (email === 'admin@laaka.np') {
-                navigate('/admin');
-            } else if (email === 'customer@gmail.com') {
-                navigate('/customer');
-            }
-
         } catch (error) {
             console.error('Error during login:', error);
             alert('Login failed: ' + (error as Error).message);
         }
     };
+
 
     return (
         <header className="header">
@@ -183,13 +175,13 @@ function Header({ onSectionChange }: HeaderProps) {
                                 <h2>Signup</h2>
                                 <form onSubmit={handleSignupSubmit}>
                                     <label htmlFor="fullname">Full Name:</label>
-                                    <input type="text" id="fullname" name="fullname" required />
+                                    <input type="text" id="fullname" name="fullname" value={signupData.fullname} onChange={handleSignupChange} required />
 
                                     <label htmlFor="contact">Contact:</label>
-                                    <input type="text" id="contact" name="contact" required />
+                                    <input type="text" id="contact" name="contact" value={signupData.contact} onChange={handleSignupChange} required />
 
                                     <label htmlFor="address">Address:</label>
-                                    <input type="text" id="address" name="address" required />
+                                    <input type="text" id="address" name="address" value={signupData.address} onChange={handleSignupChange} required />
 
                                     <label htmlFor="signup-email">Email:</label>
                                     <input type="email" id="signup-email" name="signup-email" required />

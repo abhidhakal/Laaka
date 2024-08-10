@@ -33,14 +33,17 @@
 }
 
 .shoe-detail-info {
-    display: grid;
-    grid-template-rows: 250px 250px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 5px;
 }
 
 .shoe-detail-order {
     display: flex;
     flex-direction: row;
     column-gap: 50px;
+
+    margin-top: 200px;
 }
 
 .order-product-btn {

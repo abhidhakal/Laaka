@@ -1,6 +1,12 @@
 import '../../styles/customer/brandpage.css';
 import Footer from "../../general/Footer.tsx";
 import {useEffect, useState} from "react";
+import axios from "axios";
+
+interface Brand {
+    brandId: number;
+    brandName: string;
+}
 
 function BrandsMain() {
 
@@ -11,9 +17,12 @@ function BrandsMain() {
         });
     };
 
+    const [brands, setBrands] = useState<Brand[]>([]);
     const [showScrollButton, setShowScrollButton] = useState(false);
 
     useEffect(() => {
+        fetchBrands();
+
         const handleScroll = () => {
             if (window.scrollY > 100) {
                 setShowScrollButton(true);
@@ -29,9 +38,29 @@ function BrandsMain() {
         };
     }, []);
 
+    const fetchBrands = async () => {
+        try {
+            const response = await axios.get('http://localhost:8070/api/brands');
+            setBrands(response.data);
+        } catch (error) {
+            console.error("Error fetching brands:", error);
+        }
+    };
+
     return (
         <div className="brand-frame">
-            <h1>Brands</h1>
+            <div className="customer-brands-list">
+                <div className="brands-list-title">
+                    <h2>All Our Current Brands</h2>
+                </div>
+                {brands.map(brand => (
+                    <div key={brand.brandId} className="brand-item">
+                        {brand.brandName}
+                    </div>
+                ))}
+            </div>
+
+            <h1>Links</h1>
 
             <div className="brandsframe">
                 <div className="brand">
